@@ -23,10 +23,10 @@ const AboutQualitySection = () => {
           <AboutShieldIcon className="h-20 w-20" />
         </div>
 
-        <h3 className="mx-auto mt-8 max-w-4xl text-3xl font-semibold text-slate-900 md:text-5xl">
+        <h3 className="mx-auto mt-8 max-w-4xl text-3xl font-semibold text-slate-900 md:text-4xl lg:text-[42px] lg:leading-[1.3]">
           Quality matters — especially in recruitment.
         </h3>
-        <p className="mx-auto mt-6 max-w-4xl text-sm leading-7 text-slate-600 md:text-base">
+        <p className="mx-auto mt-6 max-w-4xl text-sm leading-7 text-slate-600 md:text-md">
           Nomad is built around trust. Companies, recruiters, and recruitment
           agencies are verified before they can actively use the platform. By
           keeping the platform focused on quality, Nomad creates a safer and
@@ -40,10 +40,10 @@ const AboutQualitySection = () => {
               className="rounded-xl border border-slate-200 bg-white px-6 py-8 text-center"
             >
               <AboutCheckIcon className="mx-auto h-5 w-5 text-slate-900" />
-              <h4 className="mt-4 text-lg font-semibold text-slate-900">
+              <h4 className="mt-4 text-md font-semibold text-slate-900">
                 {card.title}
               </h4>
-              <p className="mt-3 text-sm text-slate-500">{card.description}</p>
+              <p className="mt-3 text-md text-slate-500">{card.description}</p>
             </div>
           ))}
         </div>

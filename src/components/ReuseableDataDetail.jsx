@@ -215,16 +215,16 @@ function ReuseableDataDetail({ data, onClose }) {
           <table className="min-w-full border border-[#D1D1D1] rounded-t-[14px] overflow-hidden border-collapse">
             <thead>
               <tr className="bg-primary">
-                <th className="px-4 py-3 text-center font-poppins text-[0.875rem] font-normal leading-[120%] text-white rounded-tl-[14px]">
+                <th className="px-4 py-3 text-center   text-[0.875rem] font-normal leading-[120%] text-white rounded-tl-[14px]">
                   Data
                 </th>
-                <th className="px-4 py-3 text-center font-poppins text-[0.875rem] font-normal leading-[120%] text-white ">
+                <th className="px-4 py-3 text-center   text-[0.875rem] font-normal leading-[120%] text-white ">
                   Semana
                 </th>
-                <th className="px-4 py-3 text-center font-poppins text-[0.875rem] font-normal leading-[120%] text-white">
+                <th className="px-4 py-3 text-center   text-[0.875rem] font-normal leading-[120%] text-white">
                   Tema
                 </th>
-                <th className="px-4 py-3 text-center font-poppins text-[0.875rem] font-normal leading-[120%] text-white rounded-tr-[14px]">
+                <th className="px-4 py-3 text-center   text-[0.875rem] font-normal leading-[120%] text-white rounded-tr-[14px]">
                   Sub-temas
                 </th>
               </tr>

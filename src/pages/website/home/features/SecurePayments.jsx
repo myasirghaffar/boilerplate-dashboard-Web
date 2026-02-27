@@ -32,7 +32,7 @@ const SecurePayments = () => {
             </div>
 
             <div>
-              <h2 className="text-3xl font-semibold leading-tight text-white md:text-4xl lg:text-5xl">
+              <h2 className="text-3xl font-semibold leading-tight text-white md:text-4xl lg:text-[42px] lg:leading-[1.3]">
                 Secure Payments Powered by Stripe
               </h2>
               <div className="mt-6 h-1.5 w-28 rounded-full bg-gradient-to-r from-white via-white/60 to-transparent" />

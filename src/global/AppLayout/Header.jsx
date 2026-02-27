@@ -1,6 +1,6 @@
 import { Menu } from "lucide-react";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useGetDriverAlertReminderQuery } from "../../services/driver/driverApi";
 import {
   ChevronDownIcon,
@@ -10,6 +10,7 @@ import {
 
 function Header({ toggleSidebar }) {
   const location = useLocation();
+  const navigate = useNavigate();
   const currentRole = useSelector((state) => state.auth.user?.role);
   const { data: alertsData } = useGetDriverAlertReminderQuery();
   const unreadCount =
@@ -23,7 +24,37 @@ function Header({ toggleSidebar }) {
       };
     }
 
-    const lastPath = location.pathname.split("/").filter(Boolean).pop() || "dashboard";
+    const path = location.pathname;
+    // Company role - check before admin (path can contain "company")
+    const headerMap = [
+      [
+        "chat",
+        {
+          title: "Chat",
+          subtitle: "Messages and conversations",
+        },
+      ],
+      [
+        "profile",
+        {
+          title: "Profile",
+          subtitle: "View and manage your profile",
+        },
+      ],
+      [
+        "notifications",
+        {
+          title: "Notifications",
+          subtitle: "View and manage your notifications",
+        },
+      ],
+    ];
+
+    for (const [route, meta] of headerMap) {
+      if (path.includes(route)) return meta;
+    }
+
+    const lastPath = path.split("/").filter(Boolean).pop() || "dashboard";
     const title = lastPath
       .split("-")
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -52,6 +83,11 @@ function Header({ toggleSidebar }) {
         <div className="flex items-center gap-3">
           <button
             type="button"
+            onClick={() => {
+              const roleBase =
+                location.pathname.split("/").filter(Boolean)[0] || "admin";
+              navigate(`/${roleBase}/notifications`);
+            }}
             className="relative hidden md:flex h-9 w-9 items-center justify-center rounded-[10px] text-[#4A5565] hover:bg-gray-100 transition-colors"
             aria-label="Notifications"
           >

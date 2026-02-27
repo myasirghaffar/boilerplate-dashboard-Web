@@ -2,13 +2,14 @@ import React from "react";
 import DashboardCards from "../../../../components/nomadReusable/DashboardCards";
 
 import {
-  AlertCircle,
-  BadgeDollarSign,
-  Handshake,
-  Landmark,
-  ShieldCheck,
-  Users,
-} from "lucide-react";
+  DashboardCardAlertIcon,
+  DashboardCardDealsIcon,
+  DashboardCardEscrowIcon,
+  DashboardCardRevenueIcon,
+  DashboardCardUsersIcon,
+} from "../../../../assets/icons";
+
+
 
 // Dashboard Cards Container Component
 const DashboardCardsContainer = () => {
@@ -18,45 +19,45 @@ const DashboardCardsContainer = () => {
       value: "1,450",
       percentage: "18%",
       trendLabel: "+89 this month",
-      icon: Users,
-      iconBgClass: "bg-blue-50",
-      iconClass: "text-blue-600",
+      icon: DashboardCardUsersIcon,
+      iconBgClass: "bg-indigo-500/10",
+      iconClass: "text-indigo-500",
     },
     {
       title: "Active Marketplace Deals",
       value: "186",
       percentage: "12%",
       trendLabel: "+24 this week",
-      icon: Handshake,
-      iconBgClass: "bg-pink-50",
-      iconClass: "text-pink-600",
+      icon: DashboardCardDealsIcon,
+      iconBgClass: "bg-pink-500/10",
+      iconClass: "text-pink-500",
     },
     {
       title: "Platform Revenue",
-      value: "EUR142K",
+      value: "€142K",
       percentage: "15%",
-      trendLabel: "+EUR18K",
-      icon: BadgeDollarSign,
-      iconBgClass: "bg-emerald-50",
-      iconClass: "text-emerald-600",
+      trendLabel: "+€18K",
+      icon: DashboardCardRevenueIcon,
+      iconBgClass: "bg-emerald-500/10",
+      iconClass: "text-emerald-500",
     },
     {
       title: "Total Escrow Funds",
-      value: "EUR640K",
+      value: "€640K",
       percentage: "22%",
-      trendLabel: "EUR85K pending",
-      icon: Landmark,
-      iconBgClass: "bg-amber-50",
-      iconClass: "text-amber-600",
+      trendLabel: "€85K pending",
+      icon: DashboardCardEscrowIcon,
+      iconBgClass: "bg-amber-500/10",
+      iconClass: "text-amber-500",
     },
     {
       title: "Pending Verifications",
       value: "28",
       percentage: "0%",
       trendLabel: "Urgent",
-      icon: AlertCircle,
-      iconBgClass: "bg-red-50",
-      iconClass: "text-red-600",
+      icon: DashboardCardAlertIcon,
+      iconBgClass: "bg-red-500/10",
+      iconClass: "text-red-500",
     },
   ];
 

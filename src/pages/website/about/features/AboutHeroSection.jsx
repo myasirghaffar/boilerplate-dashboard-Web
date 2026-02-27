@@ -12,13 +12,13 @@ const AboutHeroSection = () => {
             </span>
           </div>
 
-          <h1 className="mt-8 text-5xl font-semibold leading-tight md:text-7xl">
+          <h1 className="mt-8 text-3xl font-semibold leading-tight md:text-4xl lg:text-[42px] lg:leading-[1.3]">
             About Us
           </h1>
 
           <div className="mx-auto mt-8 h-2 w-24 rounded-full bg-gradient-to-b from-slate-900 to-blue-900" />
 
-          <p className="mx-auto mt-10 max-w-4xl text-lg text-white/90 md:text-2xl md:leading-10">
+          <p className="mx-auto mt-10 max-w-4xl text-lg text-white/90 md:text-xl md:leading-10">
             We&apos;re here to help you navigate the marketplace with clarity and
             control. Whether you&apos;re a company or a recruiter, reach out to our
             team and we&apos;ll get back to you as soon as possible

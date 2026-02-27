@@ -6,28 +6,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/slices/authSlice";
 import { persistor } from "../../store";
 import {
-  DashboardIcon,
   AdminDashboardNavIcon,
-  AdminCompanyNavIcon,
-  AdminRecruiterNavIcon,
-  AdminRecruiterCompanyNavIcon,
-  AdminCompanyJobNavIcon,
-  AdminRecruiterEmployeeNavIcon,
-  AdminSubscriptionPlanNavIcon,
-  AdminPageNavIcon,
   AdminChatNavIcon,
-  AdminConfigurationNavIcon,
-  AdminSupportNavIcon,
+  RoleDashboardGridIcon,
+  RoleProfileIcon,
+  RoleChatIcon,
   LogoutIcon,
   XIcon,
-  StudentIcon,
-  TeacherIcon,
-  FinancialIcon,
-  ScheduleIcon,
-  CalendarIcon,
-  MessageIcon,
-  RelationIcon,
 } from "../../assets/icons";
+import { logo } from "../../assets/logos";
 
 function Sidebar({ isMobileSidebarOpen, toggleSidebar }) {
   const dispatch = useDispatch();
@@ -65,98 +52,31 @@ function Sidebar({ isMobileSidebarOpen, toggleSidebar }) {
       admin: {
         main: [
           { path: "/admin/dashboard", name: "Dashboard", icon: AdminDashboardNavIcon },
-          { path: "/admin/company", name: "Company", icon: AdminCompanyNavIcon },
-          { path: "/admin/recruiter", name: "Recruiter", icon: AdminRecruiterNavIcon },
-          {
-            path: "/admin/recruiter-company",
-            name: "Recruiter Company",
-            icon: AdminRecruiterCompanyNavIcon,
-          },
-          {
-            path: "/admin/company-job",
-            name: "Company Job",
-            icon: AdminCompanyJobNavIcon,
-          },
-          {
-            path: "/admin/recruiter-employee",
-            name: "Recruiter Employee",
-            icon: AdminRecruiterEmployeeNavIcon,
-          },
-          {
-            path: "/admin/subscription-plan",
-            name: "Subscription Plan",
-            icon: AdminSubscriptionPlanNavIcon,
-          },
-          { path: "/admin/page", name: "Page", icon: AdminPageNavIcon },
           { path: "/admin/chat", name: "Chat", icon: AdminChatNavIcon },
-          {
-            path: "/admin/configuration",
-            name: "Configuration",
-            icon: AdminConfigurationNavIcon,
-          },
-          { path: "/admin/support", name: "Support", icon: AdminSupportNavIcon },
         ],
         bottom: [],
       },
       agency: {
         main: [
-          { path: "/agency/dashboard", name: "Dashboard", icon: DashboardIcon },
-          { path: "/agency/candidates", name: "Candidates", icon: StudentIcon },
-          { path: "/agency/jobs", name: "Jobs", icon: TeacherIcon },
-          { path: "/agency/messages", name: "Messages", icon: MessageIcon },
-          {
-            path: "/agency/reports",
-            name: "Reports",
-            icon: RelationIcon,
-          },
+          { path: "/agency/dashboard", name: "Dashboard", icon: RoleDashboardGridIcon },
+          { path: "/agency/profile", name: "Profile", icon: RoleProfileIcon },
+          { path: "/agency/chat", name: "Chat", icon: RoleChatIcon },
         ],
         bottom: [],
       },
       company: {
         main: [
-          { path: "/company/dashboard", name: "Dashboard", icon: DashboardIcon },
-          { path: "/company/jobs", name: "Jobs", icon: TeacherIcon },
-          {
-            path: "/company/agency",
-            name: "Agency Partners",
-            icon: RelationIcon,
-          },
-          {
-            path: "/company/recruiters",
-            name: "Recruiters",
-            icon: MessageIcon,
-          },
-          {
-            path: "/company/reports",
-            name: "Reports",
-            icon: FinancialIcon,
-          },
+          { path: "/company/dashboard", name: "Dashboard", icon: RoleDashboardGridIcon },
+          { path: "/company/profile", name: "Profile", icon: RoleProfileIcon },
+          { path: "/company/chat", name: "Chat", icon: RoleChatIcon },
         ],
         bottom: [],
       },
       recruiter: {
         main: [
-          {
-            path: "/recruiter/dashboard",
-            name: "Dashboard",
-            icon: DashboardIcon,
-          },
-          { path: "/recruiter/jobs", name: "Jobs", icon: TeacherIcon },
-          {
-            path: "/recruiter/candidates",
-            name: "Candidates",
-            icon: StudentIcon,
-          },
-          {
-            path: "/recruiter/schedule",
-            name: "Schedule",
-            icon: ScheduleIcon,
-          },
-          {
-            path: "/recruiter/reports",
-            name: "Reports",
-            icon: CalendarIcon,
-          },
+          { path: "/recruiter/dashboard", name: "Dashboard", icon: RoleDashboardGridIcon },
+          { path: "/recruiter/profile", name: "Profile", icon: RoleProfileIcon },
+          { path: "/recruiter/chat", name: "Chat", icon: RoleChatIcon },
         ],
         bottom: [],
       },
@@ -195,7 +115,7 @@ function Sidebar({ isMobileSidebarOpen, toggleSidebar }) {
 
   const firstWord = rawUserName.trim().split(/\s+/)[0] || "N";
   const userInitial = firstWord.charAt(0).toUpperCase();
-  const brandTitle = `${firstWord} ${roleLabel}`;
+  const brandTitle = `${firstWord}`;
 
   const menuItems = getRoleBasedMenuItems(finalRoleName);
 
@@ -203,12 +123,12 @@ function Sidebar({ isMobileSidebarOpen, toggleSidebar }) {
   const finalMenuItems = menuItems?.main
     ? menuItems
     : location.pathname.startsWith("/agency")
-    ? getRoleBasedMenuItems("agency")
-    : location.pathname.startsWith("/company")
-    ? getRoleBasedMenuItems("company")
-    : location.pathname.startsWith("/recruiter")
-    ? getRoleBasedMenuItems("recruiter")
-    : getRoleBasedMenuItems("admin");
+      ? getRoleBasedMenuItems("agency")
+      : location.pathname.startsWith("/company")
+        ? getRoleBasedMenuItems("company")
+        : location.pathname.startsWith("/recruiter")
+          ? getRoleBasedMenuItems("recruiter")
+          : getRoleBasedMenuItems("admin");
 
   // Utility function to render NavLink items
   const handleLogout = () => {
@@ -245,10 +165,9 @@ function Sidebar({ isMobileSidebarOpen, toggleSidebar }) {
         }}
         className={`
           flex items-center w-full h-[48px] pl-[10px] pr-4 gap-[10px] group transition-all duration-200 relative rounded-[10px] cursor-pointer
-          ${
-            isActive
-              ? "bg-[#FFFFFF1A] text-white"
-              : "text-white/70 hover:bg-white/5 hover:text-white"
+          ${isActive
+            ? "bg-[#FFFFFF1A] text-white"
+            : "text-white/70 hover:bg-white/5 hover:text-white"
           }
           ${extraClasses}
         `}
@@ -261,14 +180,13 @@ function Sidebar({ isMobileSidebarOpen, toggleSidebar }) {
         {/* Only show icon if item has no parent (not a nested item) */}
         {!item.parent && item.icon && (
           <div
-            className={`w-5 h-5 flex items-center justify-center ${
-              isActive ? "text-white" : "text-white/70"
-            }`}
+            className={`w-5 h-5 flex items-center justify-center ${isActive ? "text-white" : "text-white/70"
+              }`}
           >
             <item.icon />
           </div>
         )}
-        <span className="text-base font-normal leading-5 font-poppins">
+        <span className="text-base font-normal leading-5  ">
           {item.name}
         </span>
         {item.badge && (
@@ -298,7 +216,7 @@ function Sidebar({ isMobileSidebarOpen, toggleSidebar }) {
     });
 
     return (
-      <div className="sidebar-content w-[18.5625rem] bg-gradient flex flex-col h-[100vh] relative py-0 sm:py-4">
+      <div className="sidebar-content w-[18.5625rem] bg-gradient flex flex-col h-[100vh] relative py-0 sm:py-0">
         <div className=" rounded-lg flex flex-col h-full">
           {/* Mobile close button */}
           <button
@@ -311,14 +229,18 @@ function Sidebar({ isMobileSidebarOpen, toggleSidebar }) {
           {/* Brand Section */}
           <div className="h-24 px-6 pt-6 pb-[1.3px] border-b border-white/10 inline-flex flex-col justify-start items-start">
             <div className="self-stretch h-10 pr-5 inline-flex justify-between items-center">
-              <div className="w-48 h-10 flex justify-start items-center gap-3">
-                <div className="size-10 bg-white/20 rounded-[10px] flex justify-center items-center">
-                  <span className="text-white text-lg font-semibold leading-7">
-                    {userInitial}
-                  </span>
+              <div className="h-10 flex justify-start items-center gap-3">
+                <div className="size-12 rounded-[10px] overflow-hidden flex justify-center items-center bg-white/10">
+                  <img
+                    src={logo}
+                    alt="Nomad logo"
+                    className="h-12 w-12 object-cover"
+                  />
                 </div>
-                <span className="text-white text-xl font-semibold leading-7">
+                <span className="text-white text-xl font-semibold leading-5">
                   {brandTitle}
+                  <br />
+                  <span className="text-[#FFFFFF99] text-xs font-normal ">{roleLabel}</span>
                 </span>
               </div>
             </div>
@@ -345,29 +267,25 @@ function Sidebar({ isMobileSidebarOpen, toggleSidebar }) {
                       {/* Parent header */}
                       <div
                         onClick={() => toggleMenuExpansion(item.parent)}
-                        className={`flex items-center w-full h-[42px] pl-[10px] pr-4 gap-[10px] group transition-all duration-200 relative rounded-md cursor-pointer ${
-                          hasActiveChild
-                            ? "bg-secondary text-white"
-                            : "text-white/70 hover:bg-white/5 hover:text-white"
-                        }`}
+                        className={`flex items-center w-full h-[42px] pl-[10px] pr-4 gap-[10px] group transition-all duration-200 relative rounded-md cursor-pointer ${hasActiveChild
+                          ? "bg-secondary text-white"
+                          : "text-white/70 hover:bg-white/5 hover:text-white"
+                          }`}
                       >
                         <div
-                          className={`w-5 h-5 flex items-center justify-center ${
-                            hasActiveChild ? "text-white" : "text-white/70"
-                          }`}
+                          className={`w-5 h-5 flex items-center justify-center ${hasActiveChild ? "text-white" : "text-white/70"
+                            }`}
                         >
-                          <TeacherIcon />
+                          <AdminDashboardNavIcon />
                         </div>
-                        <span className="text-base font-normal leading-5 font-poppins">
+                        <span className="text-base font-normal leading-5  ">
                           {item.parent}
                         </span>
                         <div className="ml-auto">
                           <svg
-                            className={`w-4 h-4 transition-transform duration-200 ${
-                              isExpanded ? "rotate-90" : ""
-                            } ${
-                              hasActiveChild ? "text-white" : "text-white/70"
-                            }`}
+                            className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? "rotate-90" : ""
+                              } ${hasActiveChild ? "text-white" : "text-white/70"
+                              }`}
                             fill="currentColor"
                             viewBox="0 0 20 20"
                           >
@@ -425,10 +343,10 @@ function Sidebar({ isMobileSidebarOpen, toggleSidebar }) {
               <div className="w-5 h-5 flex items-center justify-center">
                 <LogoutIcon color="text-gray-600 text-[1.4375rem]" />
               </div>
-              <span className="text-base font-medium leading-[1.5625rem] font-poppins">
+              <span className="text-base font-medium leading-[1.5625rem]  ">
                 Logout
               </span>
-              
+
             </button>
           </div>
         </div>
@@ -445,9 +363,8 @@ function Sidebar({ isMobileSidebarOpen, toggleSidebar }) {
 
       {/* Mobile Sidebar - only visible when toggled */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 transform transition-transform duration-300 ease-in-out ${
-          isMobileSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } md:hidden`}
+        className={`fixed inset-y-0 left-0 z-50 transform transition-transform duration-300 ease-in-out ${isMobileSidebarOpen ? "translate-x-0" : "-translate-x-full"
+          } md:hidden`}
       >
         {renderSidebarContent()}
       </aside>

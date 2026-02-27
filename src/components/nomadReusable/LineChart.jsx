@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
   LineChart as RechartsLineChart,
   Line,
@@ -8,81 +8,65 @@ import {
   CartesianGrid,
   Tooltip,
   ReferenceArea,
-  Legend
 } from 'recharts'
 import { BsThreeDots } from 'react-icons/bs'
 
 const LineChart = ({
-  title = "Receita Anual",
+  title = "Platform Growth",
+  subtitle = "New Companies vs New Recruiters",
   data = [],
-  dataKeys = ["receita", "divida"],
-  dataLabels = ["Receita Mensal", "Dívida Mensal"],
-  colors = ["#58398D", "#EA5B28"], // Orange and Purple
+  dataKeys = ["companies", "recruiters"],
+  dataLabels = ["Companies", "Recruiters"],
+  colors = ["#6366F1", "#F59E0B"],
   xAxisKey = "month",
-  yAxisFormatter = (value) => `${value === 0 ? 0 : value+"k"}`,
-  yAxisDomain = [0, 1000],
-  yAxisTicks = [0, 250, 500, 750, 1000],
-  height = 400,
+  yAxisFormatter = (value) => `${value}`,
+  yAxisDomain = [0, 160],
+  yAxisTicks = [0, 40, 80, 120, 160],
+  height = 288,
   showTooltip = true,
   showLegend = true,
-  showDropdowns = true,
+  showDropdowns = false,
   legendFlexCol,
   dropdownOptions,
   onYearChange,
   onPeriodChange,
   highlightPeriod = null, // { start: "Ago", end: "Set" }
   currency = "MT",
-  showThreeDots= false
+  showThreeDots = false,
 }) => {
   const [yearDropdownOpen, setYearDropdownOpen] = useState(false)
   const [periodDropdownOpen, setPeriodDropdownOpen] = useState(false)
-  const [screenWidth, setScreenWidth] = useState(0)
-  const [selectedYear, setSelectedYear] = useState(dropdownOptions?.year?.[0] || { label: "2025 - 2026", value: "2025-2026" })
-  const [selectedPeriod, setSelectedPeriod] = useState(dropdownOptions?.period?.[0] || { label: "Anual", value: "annual" })
+  const [selectedYear, setSelectedYear] = useState(
+    dropdownOptions?.year?.[0] || { label: "2025 - 2026", value: "2025-2026" }
+  )
+  const [selectedPeriod, setSelectedPeriod] = useState(
+    dropdownOptions?.period?.[0] || { label: "Anual", value: "annual" }
+  )
 
   // Sample data structure if none provided
   const defaultData = [
-    { month: "Jan", receita: 550, divida: 380 },
-    { month: "Fev", receita: 850, divida: 550 },
-    { month: "Mar", receita: 520, divida: 350 },
-    { month: "Abr", receita: 650, divida: 450 },
-    { month: "Mai", receita: 750, divida: 520 },
-    { month: "Jun", receita: 650, divida: 400 },
-    { month: "Jul", receita: 700, divida: 380 },
-    { month: "Ago", receita: 850, divida: 500 },
-    { month: "Set", receita: 600, divida: 600 },
-    { month: "Out", receita: 720, divida: 450 },
-    { month: "Nov", receita: 600, divida: 350 },
-    { month: "Dez", receita: 950, divida: 600 }
+    { month: "Jan", companies: 48, recruiters: 36 },
+    { month: "Feb", companies: 60, recruiters: 52 },
+    { month: "Mar", companies: 72, recruiters: 64 },
+    { month: "Apr", companies: 86, recruiters: 78 },
+    { month: "May", companies: 102, recruiters: 95 },
+    { month: "Jun", companies: 122, recruiters: 116 },
   ]
 
   const chartData = data.length > 0 ? data : defaultData
-
-  // Handle screen resize for responsive design
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth)
-    }
-
-    handleResize()
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
 
   // Custom tooltip component
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white rounded-lg px-4 py-3 shadow-lg border border-gray-200">
-          <p className="text-gray-800 text-sm font-medium mb-2">{label} 14, 2025</p>
+        <div className="rounded-lg border border-gray-200 bg-white px-3 py-2 shadow-sm">
+          <p className="mb-2 text-xs font-semibold text-gray-900">{label}</p>
           {payload.map((entry, index) => (
-            <div key={index} className="flex items-center gap-2 mb-1">
-              <div
-                className="w-3 h-3 rounded-sm"
-                style={{ backgroundColor: entry.color }}
-              ></div>
-              <span className="text-sm" style={{ color: entry.color }}>
-                {entry.value}.000{currency}
+            <div key={index} className="mb-1 flex items-center gap-2">
+              <div className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: entry.color }} />
+              <span className="text-xs font-medium" style={{ color: entry.color }}>
+                {dataLabels[index]}: {entry.value}
+                {currency ? ` ${currency}` : ""}
               </span>
             </div>
           ))}
@@ -94,14 +78,13 @@ const LineChart = ({
 
   // Custom legend component
   const CustomLegend = () => (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center justify-center gap-6 pt-2">
       {dataKeys.map((key, index) => (
         <div key={key} className="flex items-center gap-2">
-          <div
-            className="w-[0.875rem] h-[0.875rem] rounded-full flex-shrink-0"
-            style={{ backgroundColor: colors[index] }}
-          ></div>
-          <span className="text-gray-800 text-[0.75rem] md:text-[0.9375rem] xl:text-[0.75rem] font-semibold">{dataLabels[index]}</span>
+          <div className="h-[14px] w-[14px] rounded-full" style={{ backgroundColor: colors[index] }} />
+          <span className="text-xs font-normal leading-4" style={{ color: colors[index] }}>
+            {dataLabels[index]}
+          </span>
         </div>
       ))}
     </div>
@@ -111,8 +94,12 @@ const LineChart = ({
   const getHighlightIndices = () => {
     if (!highlightPeriod) return null
 
-    const startIndex = chartData.findIndex(item => item[xAxisKey] === highlightPeriod.start)
-    const endIndex = chartData.findIndex(item => item[xAxisKey] === highlightPeriod.end)
+    const startIndex = chartData.findIndex(
+      (item) => item[xAxisKey] === highlightPeriod.start
+    )
+    const endIndex = chartData.findIndex(
+      (item) => item[xAxisKey] === highlightPeriod.end
+    )
 
     if (startIndex === -1 || endIndex === -1) return null
 
@@ -122,23 +109,24 @@ const LineChart = ({
   const highlightIndices = getHighlightIndices()
 
   return (
-    <div className="bg-white rounded-[1.5rem] p-4 lg:p-6 border border-gray-100 w-full relative">
+    <div className="w-full rounded-2xl border border-gray-200 bg-white px-6 py-6">
       {/* Header with title, legend, and dropdowns */}
-      <div className={`flex flex-col sm:flex-row md:flex-col ${legendFlexCol ? legendFlexCol : "lg:flex-row"} gap-3 mb-4 lg:mb-6`}>
-        {/* Title */}
-        <h3 className="text-[1.25rem] font-medium text-gray-800">{title}</h3>
+      <div
+        className={`mb-6 flex flex-col gap-3 sm:flex-row md:flex-col ${
+          legendFlexCol ? legendFlexCol : "lg:flex-row"
+        }`}
+      >
+        <div className="space-y-1">
+          <h3 className="text-base font-bold leading-6 text-[#101828]">{title}</h3>
+          <p className="text-xs font-normal leading-4 text-[#6A7282]">{subtitle}</p>
+        </div>
 
         {/* Legend and Dropdowns Row */}
-        <div className="flex flex-1 flex-col  md:flex-col lg:flex-row justify-between sm:flex-row items-start sm:items-center md:items-start lg:items-center sm:justify-between gap-3">
-          {/* Legend */}
-          {showLegend && (
-            <div className="flex-shrink-0">
-              <CustomLegend />
-            </div>
-          )}
-{showThreeDots && (
+        <div className="flex flex-1 flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-end">
+          {showThreeDots && (
             <BsThreeDots className="text-[20px] font-semibold hover:cursor-pointer" />
           )}
+
           {/* Dropdowns */}
           {showDropdowns && (
             <div className="flex gap-2 flex-wrap">
@@ -219,91 +207,88 @@ const LineChart = ({
       </div>
 
       {/* Chart */}
-      <ResponsiveContainer width="100%" height={height}>
-        <RechartsLineChart
-          data={chartData}
-          margin={{
-            top: 20,
-            right: 30,
-            left: 40,
-            bottom: 20
-          }}
-        >
-          {/* Y-axis */}
-          <YAxis
-            axisLine={false}
-            tickLine={false}
-            tick={{
-              fill: "#3C3C3C",
-              fontSize: 15,
-              fontWeight: 600
+      <div className="h-72 w-full">
+        <ResponsiveContainer width="100%" height={height}>
+          <RechartsLineChart
+            data={chartData}
+            margin={{
+              top: 10,
+              right: 10,
+              left: -14,
+              bottom: 18,
             }}
-            width={40}
-            allowDecimals={false}
-            domain={yAxisDomain}
-            ticks={yAxisTicks}
-            tickFormatter={yAxisFormatter}
-            tickMargin={10}
-          />
-
-          {/* Grid lines */}
-          <CartesianGrid
-            strokeDasharray="3 3"
-            stroke="#E5E7EB"
-            vertical={false}
-            horizontal={true}
-            x={80}
-            width="95%"
-          />
-
-          {/* Tooltip */}
-          {showTooltip && (
-            <Tooltip
-              content={<CustomTooltip />}
-              cursor={{ stroke: '#8B5CF6', strokeWidth: 1, strokeDasharray: '3 3' }}
-              allowEscapeViewBox={{ x: false, y: false }}
+          >
+            <YAxis
+              axisLine={false}
+              tickLine={false}
+              tick={{
+                fill: "#94A3B8",
+                fontSize: 10,
+                fontWeight: 400,
+              }}
+              width={34}
+              allowDecimals={false}
+              domain={yAxisDomain}
+              ticks={yAxisTicks}
+              tickFormatter={yAxisFormatter}
             />
-          )}
 
-          {/* X-axis */}
-          <XAxis
-            dataKey={xAxisKey}
-            axisLine={false}
-            tickLine={false}
-            tick={{
-              fill: "#3C3C3C",
-              fontSize: 15,
-              fontWeight: 600
-            }}
-            padding={{ left: 20, right: 0.1 }}
-            minTickGap={1}
-          />
+            <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" vertical horizontal />
 
-          {/* Highlight Area */}
-          {highlightIndices && (
-            <ReferenceArea
-              x1={highlightIndices.start}
-              x2={highlightIndices.end}
-              fill="#8B5CF6"
-              fillOpacity={0.1}
+            {showTooltip && (
+              <Tooltip
+                content={<CustomTooltip />}
+                cursor={{ stroke: "#CBD5E1", strokeWidth: 1, strokeDasharray: "3 3" }}
+              />
+            )}
+
+            <XAxis
+              dataKey={xAxisKey}
+              axisLine={false}
+              tickLine={false}
+              tick={{
+                fill: "#94A3B8",
+                fontSize: 11,
+                fontWeight: 700,
+              }}
             />
-          )}
 
-          {/* Lines */}
-          {dataKeys.map((key, index) => (
-            <Line
-              key={key}
-              type="monotone"
-              dataKey={key}
-              stroke={colors[index]}
-              strokeWidth={8}
-              dot={{ fill: colors[index], strokeWidth: 8, r: 6 }}
-              activeDot={{ r: 7, stroke: colors[index], strokeWidth: 6, fill: '#fff' }}
-              connectNulls={false}
-            />
-          ))}
-        </RechartsLineChart>
-      </ResponsiveContainer>
+            {highlightIndices && (
+              <ReferenceArea
+                x1={highlightPeriod.start}
+                x2={highlightPeriod.end}
+                fill="#6366F1"
+                fillOpacity={0.08}
+              />
+            )}
+
+            {dataKeys.map((key, index) => (
+              <Line
+                key={key}
+                type="monotone"
+                dataKey={key}
+                stroke={colors[index]}
+                strokeWidth={2}
+                dot={{
+                  r: 4,
+                  fill: colors[index],
+                  stroke: colors[index],
+                  strokeWidth: 2,
+                }}
+                activeDot={{
+                  r: 5,
+                  fill: colors[index],
+                  stroke: "#fff",
+                  strokeWidth: 2,
+                }}
+                connectNulls={false}
+              />
+            ))}
+          </RechartsLineChart>
+        </ResponsiveContainer>
+      </div>
+
+      {showLegend && <CustomLegend />}
     </div>
   )
 }
