@@ -7,9 +7,9 @@ const ContactContent = () => {
     <>
       <ContactHeroSection />
 
-      <section className="bg-[#f3f4f6] py-14 md:py-16">
+      <section className="bg-[#f3f4f6] py-14 md:py-16 lg:py-20">
         <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-[1fr_0.95fr]">
+          <div className="grid gap-8 lg:grid-cols-[1fr_0.95fr] lg:gap-16">
             <ContactFormCard />
             <ContactSidebarCards />
           </div>

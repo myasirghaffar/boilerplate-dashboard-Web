@@ -39,8 +39,8 @@ const CoreValueCard = ({ title, badge, description, icon }) => {
                 {icon}
             </div>
 
-            <h3 className="mt-8 text-2xl font-semibold leading-8 text-slate-900">{title}</h3>
-            <p className="mt-5 text-base leading-6 text-gray-600">{description}</p>
+            <h3 className="mt-8 text-xl font-semibold leading-8 text-slate-900">{title}</h3>
+            <p className="mt-5 text-md leading-6 text-gray-600">{description}</p>
 
             <div className="absolute left-0 top-0 h-full w-1.5" />
         </article>
@@ -60,7 +60,7 @@ const CoreValues = () => {
                         <span className="text-sm font-medium text-slate-900">Core Values</span>
                     </div>
 
-                    <h2 className="mt-8 text-4xl font-semibold leading-tight text-slate-900 md:text-5xl md:leading-[1.2]">
+                    <h2 className="mt-8 text-3xl font-semibold leading-tight text-slate-900 md:text-4xl md:leading-[1.2] lg:text-[42px] lg:leading-[1.3]">
                         Why Companies & Recruiters Choose Nomad
                     </h2>
 

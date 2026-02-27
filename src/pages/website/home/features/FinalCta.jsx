@@ -37,11 +37,11 @@ const FinalCta = () => {
           <span className="text-sm font-medium text-slate-900">Ready to Get Started?</span>
         </div>
 
-        <h2 className="mt-8 text-4xl font-semibold leading-tight text-slate-900 md:text-5xl md:leading-[1.2]">
+        <h2 className="mt-8 text-3xl font-semibold leading-tight text-slate-900 md:text-4xl md:leading-[1.2] lg:text-[42px] lg:leading-[1.3]">
           Ready to Transform Your Recruitment?
         </h2>
 
-        <p className="mx-auto mt-8 max-w-[768px] text-2xl leading-10 text-gray-700">
+        <p className="mx-auto mt-8 max-w-[768px] text-lg leading-10 text-gray-700">
           Join companies and recruiters who are making smarter, fairer hiring
           decisions. Get started in minutes.
         </p>
@@ -54,7 +54,7 @@ const FinalCta = () => {
               >
                 {item.icon}
               </div>
-              <span className="text-sm font-medium text-gray-600">{item.label}</span>
+              <span className="text-md font-medium text-gray-600">{item.label}</span>
             </div>
           ))}
         </div>
@@ -62,14 +62,14 @@ const FinalCta = () => {
         <div className="mt-12 flex flex-wrap items-center justify-center gap-6">
           <Link
             to="/signup"
-            className="inline-flex h-16 items-center justify-center gap-2 rounded-2xl bg-gradient-to-l from-slate-900 to-blue-900 px-12 text-base font-medium text-white"
+            className="inline-flex h-16 items-center justify-center gap-2 rounded-2xl bg-gradient-to-l from-slate-900 to-blue-900 px-12 text-md font-medium text-white"
           >
             Get Started for Free
             <HeroArrowRightIcon className="h-5 w-5 text-white" />
           </Link>
           <Link
             to="/contact"
-            className="inline-flex h-16 items-center justify-center rounded-2xl border border-gray-200 bg-white px-12 text-base font-medium text-slate-900"
+            className="inline-flex h-16 items-center justify-center rounded-2xl border border-gray-200 bg-white px-12 text-md font-medium text-slate-900"
           >
             Schedule a Demo
           </Link>

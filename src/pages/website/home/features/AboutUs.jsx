@@ -33,13 +33,13 @@ const AboutUs = () => {
             <span className="text-sm font-medium text-slate-900">About Us</span>
           </div>
 
-          <h2 className="mx-auto mt-6 max-w-[740px] text-4xl font-semibold leading-tight text-slate-900 md:text-6xl md:leading-[1.12] lg:text-7xl">
+          <h2 className="mx-auto mt-6 max-w-[740px] text-3xl font-semibold leading-tight text-slate-900 md:text-4xl md:leading-[1.12] lg:text-[42px] lg:leading-[1.3]">
             What is Nomad Recruitment?
           </h2>
 
           <div className="mx-auto mt-8 h-2 w-24 rounded-2xl bg-gradient-to-l from-slate-900 to-blue-900" />
 
-          <p className="mx-auto mt-8 max-w-[768px] text-lg leading-8 text-gray-600 md:text-2xl md:leading-10">
+          <p className="mx-auto mt-8 max-w-[768px] text-lg leading-8 text-gray-600 md:text-xl md:leading-10">
             A transparent marketplace connecting companies with professional
             recruiters, built on fairness and mutual empowerment.
           </p>
@@ -67,7 +67,7 @@ const AboutUs = () => {
                   </div>
                 </div>
 
-                <p className="mt-8 text-lg leading-8 text-gray-700">
+                <p className="mt-8 text-md leading-8 text-gray-700">
                   {card.description}
                 </p>
               </div>

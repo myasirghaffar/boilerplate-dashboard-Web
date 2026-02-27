@@ -32,10 +32,10 @@ const ReusablePagination = ({
 
   return (
     <div
-      className={`flex min-h-10 w-full flex-col gap-3 md:flex-row md:items-center md:justify-between ${className}`}
+      className={`flex min-h-10 w-full flex-col items-center justify-center gap-3 lg:flex-row lg:justify-between ${className}`}
     >
       {showPageInfo ? (
-        <p className="text-sm font-normal leading-5 text-gray-600">
+        <p className="text-center text-sm font-normal leading-5 text-gray-600 lg:text-left">
           {`Showing ${startEntry} to ${endEntry} of ${totalItems} entries`}
         </p>
       ) : (

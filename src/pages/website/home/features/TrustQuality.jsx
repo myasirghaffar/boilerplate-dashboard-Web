@@ -41,13 +41,13 @@ const TrustQuality = () => {
             <span className="text-sm font-medium text-white/95">Security &amp; Compliance</span>
           </div>
 
-          <h2 className="mt-6 text-4xl font-semibold leading-tight md:text-5xl md:leading-[1.2]">
+          <h2 className="mt-6 text-3xl font-semibold leading-tight md:text-4xl md:leading-[1.2] lg:text-[42px] lg:leading-[1.3]">
             Trust &amp; Quality
           </h2>
 
           <div className="mx-auto mt-8 h-2 w-24 rounded-full bg-gradient-to-b from-transparent via-white to-transparent" />
 
-          <p className="mt-8 text-xl leading-8 text-white/90">
+          <p className="mt-8 text-lg leading-8 text-white/90">
             We maintain the highest standards of professionalism, security, and
             compliance to protect all parties.
           </p>
@@ -62,8 +62,8 @@ const TrustQuality = () => {
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-l from-slate-900 to-blue-900">
                 {card.icon}
               </div>
-              <h3 className="mt-8 text-lg font-medium leading-6 text-slate-900">{card.title}</h3>
-              <p className="mt-4 text-sm leading-6 text-gray-600">{card.description}</p>
+              <h3 className="mt-8 text-md font-medium leading-6 text-slate-900">{card.title}</h3>
+              <p className="mt-4 text-md leading-6 text-gray-600">{card.description}</p>
             </article>
           ))}
         </div>

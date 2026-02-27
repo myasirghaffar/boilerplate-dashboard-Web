@@ -44,7 +44,7 @@ const HomeContent = () => {
         className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0" />
-      <div className="relative mx-auto min-h-screen w-full max-w-[1280px] px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto min-h-screen w-full max-w-7xl px-4 sm:px-3 lg:px-4">
         <main className="grid items-center gap-12 pb-14 pt-32 lg:grid-cols-[1fr_480px] lg:pb-20 lg:pt-36">
           <div>
             <div className="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-5 py-3">
@@ -54,7 +54,7 @@ const HomeContent = () => {
               </span>
             </div>
 
-            <h1 className="mt-8 max-w-3xl text-4xl font-semibold leading-tight md:text-5xl lg:text-[58px] lg:leading-[1.1]">
+            <h1 className="mt-8 max-w-3xl text-3xl font-semibold leading-tight md:text-4xl lg:text-[42px] lg:leading-[1.3]">
               The Recruitment Marketplace Where Both Sides Decide The Deal.
             </h1>
 
@@ -87,9 +87,7 @@ const HomeContent = () => {
 
             <div className="mt-10 flex flex-wrap items-end gap-4">
               <div>
-                <p className="text-xl font-medium">
-                  25k+ <span className="font-normal">People Join</span>
-                </p>
+
                 <div className="mt-2 flex items-center -space-x-2">
                   {avatars.map((avatar, index) => (
                     <img
@@ -100,7 +98,11 @@ const HomeContent = () => {
                     />
                   ))}
                 </div>
+
               </div>
+              <p className="text-xl font-medium">
+                25k+ <span className="font-normal">People Join</span>
+              </p>
               <div className="flex items-center gap-2">
                 <span className="text-base font-medium uppercase">5.0</span>
                 <div className="flex items-center gap-1">

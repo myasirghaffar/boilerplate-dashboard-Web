@@ -39,13 +39,13 @@ const WhyDifferent = () => {
             <span className="text-sm font-medium text-slate-900">Comparison</span>
           </div>
 
-          <h2 className="mt-6 text-4xl font-semibold leading-tight text-slate-900 md:text-5xl md:leading-[1.2]">
+          <h2 className="mt-6 text-3xl font-semibold leading-tight text-slate-900 md:text-4xl md:leading-[1.2] lg:text-[42px] lg:leading-[1.3]">
             Why Nomad is Different
           </h2>
 
           <div className="mx-auto mt-8 h-2 w-24 rounded-full bg-gradient-to-b from-transparent via-slate-900 to-transparent" />
 
-          <p className="mt-8 text-xl leading-8 text-gray-700">
+          <p className="mt-8 text-lg leading-8 text-gray-700">
             We&apos;re not another recruitment agency. We&apos;re a marketplace built on
             transparency, fairness, and mutual control.
           </p>
@@ -55,13 +55,13 @@ const WhyDifferent = () => {
           <div className="min-w-[980px] overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-2xl shadow-slate-900/10">
             <div className="grid grid-cols-[1fr_1fr_1fr] bg-gradient-to-r from-gray-200 via-cyan-900/10 to-gray-200">
               <div className="bg-gradient-to-br from-white to-gray-50 px-8 py-8">
-                <p className="text-lg font-medium text-slate-900">Feature</p>
+                <p className="text-md font-medium text-slate-900">Feature</p>
               </div>
               <div className="bg-gradient-to-br from-white to-gray-50 px-8 py-8">
-                <p className="text-lg font-medium text-gray-500">Traditional Agencies</p>
+                <p className="text-md font-medium text-gray-500">Traditional Agencies</p>
               </div>
               <div className="rounded-tr-2xl bg-gradient-to-l from-slate-900 to-blue-900 px-8 py-8">
-                <p className="text-lg font-medium text-white">Nomad Recruitment</p>
+                <p className="text-md font-medium text-white">Nomad Recruitment</p>
               </div>
             </div>
 
@@ -71,21 +71,21 @@ const WhyDifferent = () => {
                 className="grid grid-cols-[1fr_1fr_1fr] border-t border-gray-200 bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100"
               >
                 <div className="bg-white px-8 py-8">
-                  <p className="text-base font-medium text-gray-900">{row.feature}</p>
+                  <p className="text-md font-medium text-gray-900">{row.feature}</p>
                 </div>
 
                 <div className="flex items-start gap-4 bg-white px-8 py-8">
                   <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-red-50 text-[#FB2C36]">
                     <ComparisonCrossIcon className="h-4 w-4 text-[#FB2C36]" />
                   </span>
-                  <p className="text-base leading-6 text-gray-600">{row.traditional}</p>
+                  <p className="text-md leading-6 text-gray-600">{row.traditional}</p>
                 </div>
 
                 <div className="flex items-start gap-4 bg-gradient-to-br from-white to-blue-50/20 px-8 py-8">
                   <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-l from-slate-900 to-blue-900 text-white">
                     <ComparisonCheckIcon className="h-4 w-4 text-white" />
                   </span>
-                  <p className="text-base font-medium leading-6 text-gray-900">{row.nomad}</p>
+                  <p className="text-md font-medium leading-6 text-gray-900">{row.nomad}</p>
                 </div>
               </div>
             ))}

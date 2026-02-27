@@ -101,7 +101,7 @@ const ReusableSchedule = ({
           {days.map((day, index) => (
             <div
               key={index}
-              className="bg-primary-500 text-white font-poppins font-normal text-center py-6 px-2 text-sm"
+              className="bg-primary-500 text-white   font-normal text-center py-6 px-2 text-sm"
             >
               {day}
             </div>
@@ -163,16 +163,16 @@ const ReusableSchedule = ({
                     {entry ? (
                       <div className="h-full flex flex-col justify-center items-center text-center relative">
                         <div
-                          className="font-poppins font-normal text-sm mb-1 cursor-pointer hover:underline"
+                          className="  font-normal text-sm mb-1 cursor-pointer hover:underline"
                           onClick={(e) => handleSubjectClick(entry, e)}
                         >
                           {entry.subject}
                         </div>
-                        <div className="font-poppins text-[0.75rem] opacity-90">
+                        <div className="  text-[0.75rem] opacity-90">
                           {entry.timeRange || timeSlot}
                         </div>
                         {entry.teacher && (
-                          <div className="font-poppins text-[0.75rem] opacity-75 mt-1">
+                          <div className="  text-[0.75rem] opacity-75 mt-1">
                             {entry.teacher}
                           </div>
                         )}
@@ -202,7 +202,7 @@ const ReusableSchedule = ({
           {days.slice(0, 5).map((day, index) => (
             <div
               key={index}
-              className="bg-primary-500 text-white font-poppins font-normal text-center py-2 px-1 text-xs"
+              className="bg-primary-500 text-white   font-normal text-center py-2 px-1 text-xs"
             >
               {day}
             </div>
@@ -230,12 +230,12 @@ const ReusableSchedule = ({
                     {entry ? (
                       <div className="h-full flex flex-col justify-center items-center text-center">
                         <div
-                          className="font-poppins font-normal text-xs mb-1 cursor-pointer hover:underline"
+                          className="  font-normal text-xs mb-1 cursor-pointer hover:underline"
                           onClick={(e) => handleSubjectClick(entry, e)}
                         >
                           {entry.subject}
                         </div>
-                        <div className="font-poppins text-[0.75rem] opacity-90">
+                        <div className="  text-[0.75rem] opacity-90">
                           {entry.timeRange || timeSlot}
                         </div>
                       </div>
@@ -259,7 +259,7 @@ const ReusableSchedule = ({
         <div className="space-y-4 p-4 w-full">
           {days.map((day, dayIndex) => (
             <div key={dayIndex} className="bg-gray-50 rounded-lg p-3">
-              <h3 className="font-poppins font-normal text-sm text-primary-500 mb-3 text-center">
+              <h3 className="  font-normal text-sm text-primary-500 mb-3 text-center">
                 {day}
               </h3>
               <div className="space-y-2">
@@ -287,27 +287,27 @@ const ReusableSchedule = ({
                         <div className="flex justify-between items-center">
                           <div>
                             <div
-                              className="font-poppins font-normal text-sm cursor-pointer hover:underline"
+                              className="  font-normal text-sm cursor-pointer hover:underline"
                               onClick={(e) => handleSubjectClick(entry, e)}
                             >
                               {entry.subject}
                             </div>
                             {entry.teacher && (
-                              <div className="font-poppins text-[0.75rem] opacity-75 mt-1">
+                              <div className="  text-[0.75rem] opacity-75 mt-1">
                                 {entry.teacher}
                               </div>
                             )}
                           </div>
-                          <div className="font-poppins text-[0.75rem] opacity-90">
+                          <div className="  text-[0.75rem] opacity-90">
                             {entry.timeRange || timeSlot}
                           </div>
                         </div>
                       ) : (
                         <div className="flex justify-between items-center">
-                          <span className="text-gray-400 text-sm font-poppins">
+                          <span className="text-gray-400 text-sm  ">
                             Livre
                           </span>
-                          <span className="font-poppins text-[0.75rem] text-gray-500">
+                          <span className="  text-[0.75rem] text-gray-500">
                             {timeSlot}
                           </span>
                         </div>

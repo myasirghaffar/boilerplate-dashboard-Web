@@ -1,5 +1,27 @@
 import React, { useState } from "react";
 import { ChevronDown, Search, X } from "lucide-react";
+import { FormDateInput } from "./Form";
+
+const buildUniqueOptionsFromData = (data, fieldKey) => {
+  const values = [...new Set((data ?? []).map((item) => item?.[fieldKey]))]
+    .filter((value) => typeof value === "string" && value.trim() !== "")
+    .sort((a, b) => a.localeCompare(b));
+
+  return values.map((value) => ({ label: value, value }));
+};
+
+const FILTER_LIBRARY = {
+  role: ({ data }) => ({
+    key: "role",
+    label: "Role",
+    options: buildUniqueOptionsFromData(data, "role"),
+  }),
+  status: ({ data }) => ({
+    key: "status",
+    label: "Status",
+    options: buildUniqueOptionsFromData(data, "status"),
+  }),
+};
 
 const ReusableFilter = ({
   // Search configuration
@@ -7,6 +29,8 @@ const ReusableFilter = ({
 
   // Filter dropdowns configuration
   filters = [],
+  filterKeys = [],
+  requiredFilterKeys = [],
 
   // Data to filter
   data = [],
@@ -21,6 +45,9 @@ const ReusableFilter = ({
   searchClassName = "",
   filterClassName = "",
   dropdownClassName = "",
+  filterTriggerClassName = "",
+  filterValueClassName = "",
+  filterLabelClassName = "",
 
   // Action buttons
   actionButtons = [],
@@ -33,10 +60,33 @@ const ReusableFilter = ({
   searchFields = [],
   caseSensitive = false,
   debounceMs = 300,
+  dateRangeConfig = null,
+  renderFiltersBeforeActions = false,
 }) => {
   const [openDropdowns, setOpenDropdowns] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedFilters, setSelectedFilters] = useState({});
+  const filteredDataCallbackRef = React.useRef(onFilteredDataChange);
+  const previousFilteredSignatureRef = React.useRef("");
+  const resolvedFilters = React.useMemo(() => {
+    if (Array.isArray(filters) && filters.length > 0) {
+      return filters;
+    }
+
+    const keysToResolve =
+      filterKeys.length > 0 ? filterKeys : requiredFilterKeys;
+
+    return keysToResolve
+      .map((key) => {
+        const resolver = FILTER_LIBRARY[key];
+        return resolver ? resolver({ data }) : null;
+      })
+      .filter(Boolean);
+  }, [filters, filterKeys, requiredFilterKeys, data]);
+
+  React.useEffect(() => {
+    filteredDataCallbackRef.current = onFilteredDataChange;
+  }, [onFilteredDataChange]);
 
   const toggleDropdown = (filterKey) => {
     setOpenDropdowns((prev) => {
@@ -77,6 +127,10 @@ const ReusableFilter = ({
   };
 
   // Filter data based on search and filters
+  const searchFieldsSignature = Array.isArray(searchFields)
+    ? searchFields.join("|")
+    : "";
+
   React.useEffect(() => {
     let filtered = [...data];
 
@@ -113,14 +167,17 @@ const ReusableFilter = ({
       }
     });
 
-    onFilteredDataChange?.(filtered);
+    const filteredSignature = JSON.stringify(filtered);
+    if (filteredSignature === previousFilteredSignatureRef.current) return;
+
+    previousFilteredSignatureRef.current = filteredSignature;
+    filteredDataCallbackRef.current?.(filtered);
   }, [
     data,
     searchTerm,
     selectedFilters,
-    searchFields,
+    searchFieldsSignature,
     caseSensitive,
-    onFilteredDataChange,
   ]);
 
   // Close dropdown when clicking outside
@@ -143,13 +200,102 @@ const ReusableFilter = ({
     onFilterChange?.({}, "");
   };
 
+  const renderFilterDropdowns = () =>
+    resolvedFilters.map((filter, index) => (
+      <div
+        key={filter.key}
+        className={`relative filter-dropdown ${filter.fieldLabel ? "space-y-2" : ""}`}
+      >
+        {filter.fieldLabel ? (
+          <span
+            className={`block text-sm font-medium leading-5 text-slate-900 ${filterLabelClassName}`}
+          >
+            {filter.fieldLabel}
+          </span>
+        ) : null}
+        <button
+          type="button"
+          onClick={() => toggleDropdown(filter.key)}
+          className={`inline-flex h-12 min-w-[132px] items-center justify-between gap-2 rounded-[10px] border border-gray-200 bg-white px-4 text-base font-medium text-gray-600 ${filterTriggerClassName}`}
+        >
+          <span className={`truncate ${filterValueClassName}`}>
+            {filter.options?.find((opt) => opt.value === selectedFilters[filter.key])
+              ?.label || filter.label}
+          </span>
+          <ChevronDown
+            className={`h-4 w-4 flex-shrink-0 text-gray-500 transition-transform ${openDropdowns[filter.key] ? "rotate-180" : ""
+              }`}
+          />
+        </button>
+
+        {openDropdowns[filter.key] ? (
+          <div
+            className={`absolute top-full z-50 mt-2 max-h-60 min-w-[180px] overflow-y-auto rounded-lg border border-gray-200 bg-white shadow-lg ${index === resolvedFilters.length - 1 ? "right-0" : "left-0"
+              } ${dropdownClassName}`}
+          >
+            {filter.options?.map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => handleFilterSelect(filter.key, option.value)}
+                className={`w-full px-4 py-3 text-left text-sm text-gray-700 hover:bg-gray-50 ${selectedFilters[filter.key] === option.value
+                  ? "bg-gray-50 font-medium"
+                  : ""
+                  }`}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        ) : null}
+      </div>
+    ));
+
+  const renderActionButtons = () =>
+    actionButtons.length > 0 ? (
+      actionButtons.map((button, index) => (
+        <button
+          key={index}
+          type="button"
+          onClick={button.onClick}
+          className={`inline-flex h-12 items-center justify-center gap-2 rounded-[10px] border border-gray-200 bg-white px-5 text-base font-medium leading-6 text-gray-600 ${button.className || ""
+            }`}
+        >
+          {button.icon ? <button.icon className="h-5 w-5" /> : null}
+          <span>{button.label}</span>
+        </button>
+      ))
+    ) : (
+      <>
+        <button
+          type="button"
+          onClick={() => onSearchChange?.(searchTerm)}
+          className="inline-flex h-12 min-w-32 items-center justify-center gap-2 rounded-[10px] border border-gray-200 bg-white px-5 text-base font-medium leading-6 text-gray-600"
+        >
+          <Search className="h-5 w-5 text-gray-600" />
+          <span>Search</span>
+        </button>
+        <button
+          type="button"
+          onClick={clearAllFilters}
+          className="inline-flex h-12 min-w-28 items-center justify-center gap-2 rounded-[10px] border border-gray-200 bg-white px-5 text-base font-medium leading-6 text-gray-600"
+        >
+          <X className="h-5 w-5 text-gray-600" />
+          <span>Clear</span>
+        </button>
+      </>
+    );
+
   return (
     <div
       className={`w-full rounded-2xl border border-gray-100 bg-white p-4 ${className}`}
     >
-      <div className="flex w-full flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
+      <div
+        className={`flex w-full flex-col gap-3 xl:flex-row ${dateRangeConfig ? "xl:items-end xl:justify-start xl:gap-4" : "xl:items-center xl:justify-between"
+          }`}
+      >
         {/* Search Bar */}
-        {searchConfig && (
+        {searchConfig ? (
           <div className={`relative w-full xl:max-w-[614px] ${searchClassName}`}>
             <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-600" />
             <input
@@ -172,86 +318,37 @@ const ReusableFilter = ({
               </button>
             ) : null}
           </div>
-        )}
+        ) : null}
+        {dateRangeConfig ? (
+          <div className="grid w-full grid-cols-1 gap-4 xl:max-w-[782px] xl:grid-cols-2">
+            <FormDateInput
+              label={dateRangeConfig.fromLabel || "From Date"}
+              value={dateRangeConfig.fromValue || ""}
+              onChange={(e) => dateRangeConfig.onFromChange?.(e.target.value)}
+              placeholder={dateRangeConfig.fromPlaceholder || "dd/mm/yy"}
+            />
+            <FormDateInput
+              label={dateRangeConfig.toLabel || "To Date"}
+              value={dateRangeConfig.toValue || ""}
+              onChange={(e) => dateRangeConfig.onToChange?.(e.target.value)}
+              placeholder={dateRangeConfig.toPlaceholder || "dd/mm/yy"}
+            />
+          </div>
+        ) : null}
 
         {/* Right Controls */}
         <div className={`flex w-full flex-wrap items-center justify-end gap-3 xl:w-auto ${filterClassName}`}>
-          {/* Filter Dropdowns */}
-          {/* Action Buttons */}
-          {actionButtons.length > 0 ? (
-            actionButtons.map((button, index) => (
-              <button
-                key={index}
-                type="button"
-                onClick={button.onClick}
-                className={`inline-flex h-12 items-center justify-center gap-2 rounded-[10px] border border-gray-200 bg-white px-5 text-base font-medium leading-6 text-gray-600 ${button.className || ""}`}
-              >
-                {button.icon ? <button.icon className="h-5 w-5" /> : null}
-                <span>{button.label}</span>
-              </button>
-            ))
+          {renderFiltersBeforeActions ? (
+            <>
+              {renderFilterDropdowns()}
+              {renderActionButtons()}
+            </>
           ) : (
             <>
-              <button
-                type="button"
-                onClick={() => onSearchChange?.(searchTerm)}
-                className="inline-flex h-12 min-w-32 items-center justify-center gap-2 rounded-[10px] border border-gray-200 bg-white px-5 text-base font-medium leading-6 text-gray-600"
-              >
-                <Search className="h-5 w-5 text-gray-600" />
-                <span>Search</span>
-              </button>
-              <button
-                type="button"
-                onClick={clearAllFilters}
-                className="inline-flex h-12 min-w-28 items-center justify-center gap-2 rounded-[10px] border border-gray-200 bg-white px-5 text-base font-medium leading-6 text-gray-600"
-              >
-                <X className="h-5 w-5 text-gray-600" />
-                <span>Clear</span>
-              </button>
+              {renderActionButtons()}
+              {renderFilterDropdowns()}
             </>
           )}
-          {filters.map((filter, index) => (
-            <div key={filter.key} className="relative filter-dropdown">
-              <button
-                type="button"
-                onClick={() => toggleDropdown(filter.key)}
-                className="inline-flex h-12 min-w-[132px] items-center justify-between gap-2 rounded-[10px] border border-gray-200 bg-white px-4 text-base font-medium text-gray-600"
-              >
-                <span className="truncate">
-                  {filter.options?.find(
-                    (opt) => opt.value === selectedFilters[filter.key]
-                  )?.label || filter.label}
-                </span>
-                <ChevronDown
-                  className={`h-4 w-4 flex-shrink-0 text-gray-500 transition-transform ${openDropdowns[filter.key] ? "rotate-180" : ""
-                    }`}
-                />
-              </button>
-
-              {openDropdowns[filter.key] ? (
-                <div
-                  className={`absolute top-full z-50 mt-2 max-h-60 min-w-[180px] overflow-y-auto rounded-lg border border-gray-200 bg-white shadow-lg ${index === filters.length - 1 ? "right-0" : "left-0"
-                    } ${dropdownClassName}`}
-                >
-                  {filter.options?.map((option) => (
-                    <button
-                      key={option.value}
-                      type="button"
-                      onClick={() => handleFilterSelect(filter.key, option.value)}
-                      className={`w-full px-4 py-3 text-left text-sm text-gray-700 hover:bg-gray-50 ${selectedFilters[filter.key] === option.value
-                        ? "bg-gray-50 font-medium"
-                        : ""
-                        }`}
-                    >
-                      {option.label}
-                    </button>
-                  ))}
-                </div>
-              ) : null}
-            </div>
-          ))}
-
-
         </div>
       </div>
     </div>

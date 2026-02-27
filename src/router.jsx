@@ -10,8 +10,10 @@ import WebsiteLayout from "./layouts/WebsiteLayout";
 import WebsiteHome from "./pages/website/home";
 import WebsiteAbout from "./pages/website/about";
 import WebsiteContact from "./pages/website/contact";
+import NotificationsScreen from "./pages/commanPages/notificationsScreen";
+import SharedChat from "./pages/commanPages/chat";
+import SharedProfile from "./pages/commanPages/profile";
 
-// Dashboard imports
 import AdminDashboard from "./pages/adminRole/dashboard";
 import AgencyDashboard from "./pages/agencyRole/dashboard";
 import CompanyDashboard from "./pages/companyRole/dashboard";
@@ -46,6 +48,8 @@ const AppRouter = () => {
       >
         <Route index element={<AdminDashboard />} />
         <Route path="dashboard" element={<AdminDashboard />} />
+        <Route path="chat" element={<SharedChat />} />
+        <Route path="notifications" element={<NotificationsScreen />} />
       </Route>
 
       {/* Agency dashboard routes */}
@@ -59,6 +63,9 @@ const AppRouter = () => {
       >
         <Route index element={<AgencyDashboard />} />
         <Route path="dashboard" element={<AgencyDashboard />} />
+        <Route path="chat" element={<SharedChat />} />
+        <Route path="profile" element={<SharedProfile />} />
+        <Route path="notifications" element={<NotificationsScreen />} />
       </Route>
 
       {/* Company dashboard routes */}
@@ -72,6 +79,9 @@ const AppRouter = () => {
       >
         <Route index element={<CompanyDashboard />} />
         <Route path="dashboard" element={<CompanyDashboard />} />
+        <Route path="chat" element={<SharedChat />} />
+        <Route path="profile" element={<SharedProfile />} />
+        <Route path="notifications" element={<NotificationsScreen />} />
       </Route>
 
       {/* Recruiter dashboard routes */}
@@ -85,6 +95,9 @@ const AppRouter = () => {
       >
         <Route index element={<RecruiterDashboard />} />
         <Route path="dashboard" element={<RecruiterDashboard />} />
+        <Route path="chat" element={<SharedChat />} />
+        <Route path="profile" element={<SharedProfile />} />
+        <Route path="notifications" element={<NotificationsScreen />} />
       </Route>
 
       {/* Catch-all route */}

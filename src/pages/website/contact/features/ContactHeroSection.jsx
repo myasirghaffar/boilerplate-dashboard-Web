@@ -11,10 +11,10 @@ const ContactHeroSection = () => {
           </span>
         </div>
 
-        <h1 className="mt-7 text-5xl font-semibold text-white md:text-7xl">Contact Us</h1>
+        <h1 className="mt-7 text-3xl font-semibold text-white md:text-4xl lg:text-[42px] lg:leading-[1.3]">Contact Us</h1>
         <div className="mx-auto mt-7 h-2 w-24 rounded-full bg-gradient-to-b from-slate-900 to-blue-900" />
 
-        <p className="mx-auto mt-8 max-w-3xl text-lg leading-8 text-white/85 md:text-2xl md:leading-10">
+        <p className="mx-auto mt-8 max-w-3xl text-lg leading-8 text-white/85 md:text-xl md:leading-10">
           Have questions? We&apos;re here to help. Reach out to our team and
           we&apos;ll get back to you as soon as possible.
         </p>

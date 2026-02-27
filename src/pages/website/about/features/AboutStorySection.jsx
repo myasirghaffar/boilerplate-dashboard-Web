@@ -9,10 +9,10 @@ const AboutStorySection = () => {
     <section className="bg-[#f3f4f6] py-16 md:py-20">
       <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl font-semibold text-slate-900 md:text-5xl">
+          <h2 className="text-3xl font-semibold text-slate-900 md:text-4xl lg:text-[42px] lg:leading-[1.3]">
             What is Nomad Recruitment?
           </h2>
-          <p className="mx-auto mt-6 max-w-3xl text-sm leading-7 text-slate-600 md:text-base">
+          <p className="mx-auto mt-6 max-w-3xl text-sm leading-7 text-slate-600 md:text-md">
             Nomad Recruitment is an online recruitment marketplace that connects
             companies directly with recruiters and recruitment agencies. Instead
             of long contracts, high percentage fees, or one-sided control, Nomad
@@ -21,10 +21,10 @@ const AboutStorySection = () => {
         </div>
 
         <div className="mt-12 rounded-2xl bg-gradient-to-r from-[#2f4d97] to-[#03153f] p-8 text-center text-white md:p-12">
-          <h3 className="text-3xl font-semibold md:text-5xl">
+          <h3 className="text-3xl font-semibold md:text-4xl lg:text-[42px] lg:leading-[1.3]">
             A new way of working.
           </h3>
-          <p className="mx-auto mt-6 max-w-4xl text-sm leading-7 text-white/85 md:text-base">
+          <p className="mx-auto mt-6 max-w-4xl text-sm leading-7 text-white/85 md:text-md">
             Nomad isn&apos;t another recruitment platform. It&apos;s a new way of
             working. Instead of high percentage fees and one-sided control, we
             bring companies and recruiters together in one transparent
@@ -45,10 +45,10 @@ const AboutStorySection = () => {
         </div>
 
         <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-16">
-          <h3 className="text-4xl font-semibold leading-tight text-slate-900 md:text-5xl">
+          <h3 className="text-4xl font-semibold leading-tight text-slate-900 md:text-4xl lg:text-[42px] lg:leading-[1.3]">
             Recruitment should be simple.
           </h3>
-          <p className="text-sm leading-8 text-slate-600 md:text-base">
+          <p className="text-sm leading-8 text-slate-600 md:text-md">
             In reality, it often isn&apos;t. For companies, hiring talent has become
             expensive and unpredictable. On the other side, recruiters face work
             without guarantees. Nomad changes this by putting clarity, control,

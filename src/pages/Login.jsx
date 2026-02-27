@@ -3,9 +3,9 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { HeroArrowRightIcon } from "../assets/icons";
+import { ArrowBackIcon, HeroArrowRightIcon } from "../assets/icons";
 import { logo } from "../assets/logos";
-import ReusableInput from "../components/ReusableInput";
+import { ReusableInput } from "../components/Form";
 import { authenticateUser, dummyUsers } from "../data/dummyUsers";
 import { setUser } from "../store/slices/authSlice";
 import { getDashboardPathByRole } from "../utils/roles";
@@ -82,39 +82,39 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-l from-slate-900 to-blue-900 px-4 py-10">
-      <div className="mx-auto w-full max-w-[536px]">
+    <div className="flex h-screen items-center justify-center overflow-auto bg-gradient-to-l from-slate-900 to-blue-900 px-4 py-4">
+      <div className="mx-auto w-full max-w-[480px]">
         <Link
           to="/"
           className="inline-flex items-center gap-2 text-sm text-gray-400 transition hover:text-gray-300"
         >
-          <HeroArrowRightIcon className="h-5 w-5 rotate-180 text-gray-400" />
+          <ArrowBackIcon className="h-3 w-3 text-gray-400" />
           Back to Home
         </Link>
 
-        <div className="mt-4 rounded-3xl border border-gray-200 bg-white p-8 shadow-xl md:p-10">
-          <div className="flex flex-col items-center gap-2.5 text-center">
-            <img src={logo} alt="Nomad logo" className="h-16 w-16 rounded-xl object-cover shadow-lg" />
-            <h1 className="text-3xl font-semibold leading-[1.2] text-slate-900">
+        <div className="mt-3 rounded-2xl border border-gray-200 bg-white p-5 shadow-xl sm:p-6">
+          <div className="flex flex-col items-center gap-1.5 text-center">
+            <img src={logo} alt="Nomad logo" className="h-12 w-12 rounded-xl object-cover shadow-lg" />
+            <h1 className="text-2xl font-semibold leading-tight text-slate-900">
               Sign In to Nomad
             </h1>
-            <p className="text-lg text-gray-500">
+            <p className="text-sm text-gray-500">
               Welcome back! Please enter your details.
             </p>
           </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="mt-5 space-y-4">
             <div>
-              <label className="mb-2 block text-lg font-medium leading-7 text-slate-900">
+              <label className="mb-1.5 block text-sm font-medium text-slate-900">
                 Select Role
               </label>
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
                 {roleOptions.map((role) => (
                   <button
                     key={role.id}
                     type="button"
                     onClick={() => setSelectedRole(role.id)}
-                    className={`h-14 rounded-2xl text-base font-medium transition ${selectedRole === role.id
+                    className={`h-10 rounded-xl text-sm font-medium transition ${selectedRole === role.id
                       ? "bg-[#25406A] text-white"
                       : "bg-gray-50 text-gray-500 hover:bg-gray-100"
                       }`}
@@ -131,8 +131,8 @@ const Login = () => {
               border="border-gray-200"
               backgroundColor="bg-white"
               focusRing="focus:ring-cyan-900"
-              inputClassName="!h-16 rounded-2xl border text-lg text-slate-900 placeholder:text-gray-400"
-              labelClassName="mb-2 text-lg font-medium leading-7 text-slate-900"
+              inputClassName="!h-11 rounded-xl border text-sm text-slate-900 placeholder:text-gray-400"
+              labelClassName="mb-1.5 text-sm font-medium text-slate-900"
               error={errors.email?.message}
               {...register("email", {
                 required: "Email is required",
@@ -150,8 +150,8 @@ const Login = () => {
               border="border-gray-200"
               backgroundColor="bg-white"
               focusRing="focus:ring-cyan-900"
-              inputClassName="!h-16 rounded-2xl border text-lg text-slate-900 placeholder:text-gray-400"
-              labelClassName="mb-2 text-lg font-medium leading-7 text-slate-900"
+              inputClassName="!h-11 rounded-xl border text-sm text-slate-900 placeholder:text-gray-400"
+              labelClassName="mb-1.5 text-sm font-medium text-slate-900"
               error={errors.password?.message}
               {...register("password", {
                 required: "Password is required",
@@ -161,14 +161,14 @@ const Login = () => {
             <div className="flex justify-end">
               <button
                 type="button"
-                className="text-base text-[#25406A] transition hover:text-[#1f3557]"
+                className="text-sm text-[#25406A] transition hover:text-[#1f3557]"
               >
                 Forgot password?
               </button>
             </div>
 
             {error && (
-              <div className="rounded-2xl border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+              <div className="rounded-xl border border-red-200 bg-red-50 p-2.5 text-xs text-red-700">
                 {error}
               </div>
             )}
@@ -176,31 +176,35 @@ const Login = () => {
             <button
               disabled={auth.loading}
               type="submit"
-              className="h-14 w-full rounded-2xl bg-[#25406A] text-xl font-medium text-white transition hover:bg-[#1f3557] disabled:cursor-not-allowed disabled:opacity-60"
+              className="h-11 w-full rounded-xl bg-[#25406A] text-base font-medium text-white transition hover:bg-[#1f3557] disabled:cursor-not-allowed disabled:opacity-60"
             >
               {auth.loading ? "Signing In..." : "Sign In"}
             </button>
           </form>
 
-          <div className="mt-8 flex items-center gap-5">
-            <div className="h-px flex-1 bg-gray-200" />
-            <span className="text-base text-gray-500">or</span>
-            <div className="h-px flex-1 bg-gray-200" />
-          </div>
+          {selectedRole !== "admin" && (
+            <>
+              <div className="mt-5 flex items-center gap-4">
+                <div className="h-px flex-1 bg-gray-200" />
+                <span className="text-sm text-gray-500">or</span>
+                <div className="h-px flex-1 bg-gray-200" />
+              </div>
 
-          <Link
-            to="/signup"
-            className="mt-8 inline-flex h-16 w-full items-center justify-center rounded-2xl border border-[#25406A] text-xl font-medium text-[#25406A] transition hover:bg-[#25406A]/5"
-          >
-            Create New Account
-          </Link>
+              <Link
+                to="/signup"
+                className="mt-5 inline-flex h-11 w-full items-center justify-center rounded-xl border border-[#25406A] text-base font-medium text-[#25406A] transition hover:bg-[#25406A]/5"
+              >
+                Create New Account
+              </Link>
 
-          <div className="mt-6 text-center">
-            <span className="text-base text-gray-500">Don&apos;t have an account? </span>
-            <Link to="/signup" className="text-xl font-medium text-[#25406A] hover:text-[#1f3557]">
-              {`Sign up as ${selectedRoleLabel}`}
-            </Link>
-          </div>
+              <div className="mt-4 text-center">
+                <span className="text-sm text-gray-500">Don&apos;t have an account? </span>
+                <Link to="/signup" className="font-medium text-[#25406A] hover:text-[#1f3557]">
+                  {`Sign up as ${selectedRoleLabel}`}
+                </Link>
+              </div>
+            </>
+          )}
         </div>
       </div>
       <div className="fixed bottom-6 right-6 z-20 flex flex-col items-end gap-2">

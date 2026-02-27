@@ -1,13 +1,59 @@
 import PropTypes from "prop-types";
 import {
-  AlertCircle,
-  BadgeDollarSign,
-  Handshake,
-  Landmark,
-  ShieldCheck,
-  Users,
-} from "lucide-react";
+  DashboardCardAlertIcon,
+  DashboardCardDealsIcon,
+  DashboardCardEscrowIcon,
+  DashboardCardRevenueIcon,
+  DashboardCardUsersIcon,
+} from "../../assets/icons";
 
+const defaultCards = [
+  {
+    title: "Total Platform Users",
+    value: "1,450",
+    percentage: "18%",
+    trendLabel: "+89 this month",
+    icon: DashboardCardUsersIcon,
+    iconBgClass: "bg-indigo-500/10",
+    iconClass: "text-indigo-500",
+  },
+  {
+    title: "Active Marketplace Deals",
+    value: "186",
+    percentage: "12%",
+    trendLabel: "+24 this week",
+    icon: DashboardCardDealsIcon,
+    iconBgClass: "bg-pink-500/10",
+    iconClass: "text-pink-500",
+  },
+  {
+    title: "Platform Revenue",
+    value: "EUR142K",
+    percentage: "15%",
+    trendLabel: "+EUR18K",
+    icon: DashboardCardRevenueIcon,
+    iconBgClass: "bg-emerald-500/10",
+    iconClass: "text-emerald-500",
+  },
+  {
+    title: "Total Escrow Funds",
+    value: "EUR640K",
+    percentage: "22%",
+    trendLabel: "EUR85K pending",
+    icon: DashboardCardEscrowIcon,
+    iconBgClass: "bg-amber-500/10",
+    iconClass: "text-amber-500",
+  },
+  {
+    title: "Pending Verifications",
+    value: "28",
+    percentage: "0%",
+    trendLabel: "Urgent",
+    icon: DashboardCardAlertIcon,
+    iconBgClass: "bg-red-500/10",
+    iconClass: "text-red-500",
+  },
+];
 
 const DashboardCardItem = ({
   title,
@@ -22,9 +68,9 @@ const DashboardCardItem = ({
 }) => {
   return (
     <article
-      className={`h-full min-h-[158px] rounded-[14px] border border-[#E5E7EB99] bg-white p-4 sm:p-[17px] ${className}`}
+      className={`h-40 rounded-2xl border border-gray-200/60 bg-white p-[17px] ${className}`}
     >
-      <div className="flex h-full flex-col justify-between gap-4">
+      <div className="flex h-full flex-col">
         <div className="flex items-center justify-between">
           <div
             className={`flex h-9 w-9 items-center justify-center rounded-[10px] ${iconBgClass}`}
@@ -32,21 +78,21 @@ const DashboardCardItem = ({
             {Icon ? (
               <Icon className={`h-5 w-5 ${iconClass}`} />
             ) : (
-              <ShieldCheck className="h-5 w-5 text-slate-600" />
+              <DashboardCardUsersIcon className="h-5 w-5 text-indigo-500" />
             )}
           </div>
-          <span className="rounded bg-emerald-50 px-2 py-1 text-[10px] font-bold leading-[15px] tracking-[0.12px] text-[#009966]">
+          <span className="rounded-sm bg-emerald-50 px-2 pt-1 text-[10px] font-bold leading-4 tracking-tight text-[#009966]">
             {percentage}
           </span>
         </div>
 
-        <div className={`text-2xl font-bold leading-8 text-[#101828] ${valueClassName}`}>
+        <div className={`mt-4 text-2xl font-bold leading-8 text-[#101828] ${valueClassName}`}>
           {value}
         </div>
 
-        <div className="space-y-1">
+        <div className="mt-2 space-y-1">
           <p className="text-xs font-medium leading-4 text-[#4A5565]">{title}</p>
-          <p className="text-[10px] font-normal leading-[15px] tracking-[0.12px] text-[#6A7282]">
+          <p className="text-[10px] font-normal leading-4 tracking-tight text-[#6A7282]">
             {trendLabel}
           </p>
         </div>
@@ -73,7 +119,7 @@ const DashboardCards = ({
     Array.isArray(cards) && cards.length
       ? cards
       : hasSingleCardInput
-      ? [
+        ? [
           {
             title,
             value,
@@ -86,7 +132,7 @@ const DashboardCards = ({
             valueClassName,
           },
         ]
-      : [];
+        : defaultCards;
 
   const hasSingleCardMode = resolvedCards.length === 1;
 
@@ -96,7 +142,7 @@ const DashboardCards = ({
 
   return (
     <section className="w-full">
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {resolvedCards.map((card, index) => (
           <DashboardCardItem key={`${card.title || "card"}-${index}`} {...card} />
         ))}

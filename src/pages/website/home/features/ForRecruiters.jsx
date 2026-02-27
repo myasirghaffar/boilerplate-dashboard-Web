@@ -29,7 +29,7 @@ const ForRecruiters = () => {
               <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-[10px] bg-gradient-to-l from-slate-900 to-blue-900 text-white">
                 <ListCheckBadgeIcon className="h-5 w-5 text-white" />
               </div>
-              <p className="text-base leading-6 text-gray-700">{benefit}</p>
+              <p className="text-md leading-6 text-gray-700">{benefit}</p>
             </div>
           ))}
         </div>
@@ -39,13 +39,13 @@ const ForRecruiters = () => {
             <span className="text-sm font-medium text-slate-900">For Recruiters</span>
           </div>
 
-          <h2 className="mt-6 max-w-[560px] text-4xl font-semibold leading-tight text-slate-900 md:text-5xl md:leading-[1.2]">
+          <h2 className="mt-6 max-w-[560px] text-3xl font-semibold leading-tight text-slate-900 md:text-4xl md:leading-[1.2] lg:text-[42px] lg:leading-[1.3]">
             For Recruiters &amp; Agencies
           </h2>
 
           <div className="mt-8 h-2 w-24 rounded-2xl bg-gradient-to-l from-slate-900 to-blue-900" />
 
-          <p className="mt-8 max-w-[560px] text-xl leading-8 text-gray-700">
+          <p className="mt-8 max-w-[560px] text-lg leading-8 text-gray-700">
             Set your own fees, negotiate directly with companies, and get paid
             securely for every successful placement. Build your business on your
             terms with transparent, fair compensation.
@@ -54,12 +54,12 @@ const ForRecruiters = () => {
           <div className="mt-10 rounded-3xl border border-slate-900/10 bg-gradient-to-br from-cyan-900/5 via-blue-50/30 to-transparent p-8 shadow-2xl shadow-slate-900/5">
             <div className="flex items-center gap-3">
               <RecruiterEarningsTrendIcon className="h-6 w-6 text-[#05DF72]" />
-              <p className="text-sm font-medium uppercase tracking-tight text-slate-900/80">
+              <p className="text-md font-medium uppercase tracking-tight text-slate-900/80">
                 Average Earnings
               </p>
             </div>
-            <p className="mt-4 text-4xl font-semibold leading-10 text-slate-900">$8,500</p>
-            <p className="mt-2 text-sm text-slate-900/70">Per successful placement</p>
+            <p className="mt-4 text-3xl font-semibold leading-10 text-slate-900">$8,500</p>
+            <p className="mt-2 text-md text-slate-900/70">Per successful placement</p>
           </div>
 
           <Link

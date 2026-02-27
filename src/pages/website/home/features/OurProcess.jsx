@@ -47,7 +47,7 @@ const ProcessStepCard = ({ id, title, description, featured = false }) => {
       </div>
 
       <h3 className="relative mt-8 text-xl font-semibold leading-6 text-slate-900">{title}</h3>
-      <p className="relative mt-5 text-base leading-6 text-gray-600">{description}</p>
+      <p className="relative mt-5 text-md leading-6 text-gray-600">{description}</p>
 
       <div className="absolute inset-x-0 bottom-0 h-1.5 bg-gradient-to-l from-slate-900 to-blue-900 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
     </article>
@@ -67,13 +67,13 @@ const OurProcess = () => {
             </span>
           </div>
 
-          <h2 className="mt-8 text-4xl font-semibold leading-tight text-slate-900 md:text-5xl md:leading-[1.2]">
+          <h2 className="mt-8 text-3xl font-semibold leading-tight text-slate-900 md:text-4xl md:leading-[1.2] lg:text-[42px] lg:leading-[1.3]">
             How Nomad Works
           </h2>
 
           <div className="mx-auto mt-8 h-2 w-32 rounded-2xl bg-gradient-to-l from-slate-900 to-blue-900" />
 
-          <p className="mx-auto mt-8 max-w-[768px] text-lg leading-8 text-gray-700 md:text-2xl md:leading-10">
+          <p className="mx-auto mt-8 max-w-[768px] text-lg leading-8 text-gray-700 md:text-xl md:leading-10">
             A simple, transparent process that puts both companies and recruiters
             in control.
           </p>

@@ -58,8 +58,8 @@ const ChallengeCard = ({ id, title, description, icon, offsetClassName }) => {
           </span>
         </div>
 
-        <h3 className="mt-8 text-2xl font-semibold leading-8 text-slate-900">{title}</h3>
-        <p className="mt-5 text-lg leading-7 text-gray-700">{description}</p>
+        <h3 className="mt-8 text-xl font-semibold leading-8 text-slate-900">{title}</h3>
+        <p className="mt-5 text-md leading-7 text-gray-700">{description}</p>
       </div>
     </article>
   );
@@ -85,13 +85,13 @@ const TheChallenge = () => {
             </span>
           </div>
 
-          <h2 className="mt-8 text-4xl font-semibold leading-tight text-white md:text-6xl md:leading-[1.15] lg:text-7xl">
+          <h2 className="mt-8 text-3xl font-semibold leading-tight text-white md:text-4xl md:leading-[1.15] lg:text-[42px] lg:leading-[1.3]">
             Problem with Traditional Recruitment
           </h2>
 
           <div className="mx-auto mt-8 h-2 w-32 rounded-full bg-gradient-to-b from-transparent via-white to-transparent shadow-2xl" />
 
-          <p className="mx-auto my-10 pb-10 max-w-[768px] text-lg leading-8 text-white/90 md:text-2xl md:leading-10">
+          <p className="mx-auto my-10 pb-10 max-w-[768px] text-lg leading-8 text-white/90 md:text-xl md:leading-10">
             Hidden fees, inflexible terms, and zero transparency leave both
             companies and recruiters frustrated.
           </p>
